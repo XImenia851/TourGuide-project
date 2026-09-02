@@ -45,18 +45,18 @@ public class Tracker extends Thread {
 <span class="fc" id="L45">			List&lt;User&gt; users = tourGuideService.getAllUsers();</span>
 <span class="fc" id="L46">			logger.debug(&quot;Begin Tracker. Tracking &quot; + users.size() + &quot; users.&quot;);</span>
 <span class="fc" id="L47">			stopWatch.start();</span>
-<span class="fc" id="L48">			users.forEach(u -&gt; tourGuideService.trackUserLocation(u));</span>
-<span class="fc" id="L49">			stopWatch.stop();</span>
-<span class="fc" id="L50">			logger.debug(&quot;Tracker Time Elapsed: &quot; + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + &quot; seconds.&quot;); </span>
-<span class="fc" id="L51">			stopWatch.reset();</span>
+<span class="pc" id="L48">			users.forEach(u -&gt; tourGuideService.trackUserLocation(u));</span>
+<span class="nc" id="L49">			stopWatch.stop();</span>
+<span class="nc" id="L50">			logger.debug(&quot;Tracker Time Elapsed: &quot; + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + &quot; seconds.&quot;); </span>
+<span class="nc" id="L51">			stopWatch.reset();</span>
 			try {
-<span class="fc" id="L53">				logger.debug(&quot;Tracker sleeping&quot;);</span>
+<span class="nc" id="L53">				logger.debug(&quot;Tracker sleeping&quot;);</span>
 <span class="nc" id="L54">				TimeUnit.SECONDS.sleep(trackingPollingInterval);</span>
-<span class="fc" id="L55">			} catch (InterruptedException e) {</span>
-<span class="fc" id="L56">				break;</span>
+<span class="nc" id="L55">			} catch (InterruptedException e) {</span>
+<span class="nc" id="L56">				break;</span>
 <span class="nc" id="L57">			}</span>
 <span class="nc" id="L58">		}</span>
 		
-<span class="fc" id="L60">	}</span>
+<span class="nc" id="L60">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

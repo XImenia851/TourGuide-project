@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tourGuide.TestPerformance" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-08-28T12:28:06" hostname="UnCookiePasNet" time="8.697">
+<testsuite name="tourGuide.TestPerformance" tests="2" skipped="1" failures="0" errors="0" timestamp="2026-09-02T07:14:57" hostname="UnCookiePasNet" time="847.357">
   <properties/>
-  <testcase name="highVolumeTrackLocation" classname="tourGuide.TestPerformance" time="8.697"/>
-  <system-out><![CDATA[14:28:07.087 [Test worker] INFO tourGuide.service.TourGuideService - TestMode enabled
-14:28:07.102 [Test worker] DEBUG tourGuide.service.TourGuideService - Initializing users
-14:28:07.208 [Test worker] DEBUG tourGuide.service.TourGuideService - Created 100 internal test users.
-14:28:07.208 [Test worker] DEBUG tourGuide.service.TourGuideService - Finished initializing users
-14:28:07.213 [pool-1-thread-1] DEBUG tourGuide.tracker.Tracker - Begin Tracker. Tracking 100 users.
-highVolumeTrackLocation: Time Elapsed: 8 seconds.
+  <testcase name="highVolumeTrackLocation" classname="tourGuide.TestPerformance" time="847.356"/>
+  <testcase name="highVolumeGetRewards" classname="tourGuide.TestPerformance" time="0.001">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[09:14:57.611 [Test worker] INFO tourGuide.service.TourGuideService - TestMode enabled
+09:14:57.625 [Test worker] DEBUG tourGuide.service.TourGuideService - Initializing users
+09:14:58.161 [Test worker] DEBUG tourGuide.service.TourGuideService - Created 10000 internal test users.
+09:14:58.162 [Test worker] DEBUG tourGuide.service.TourGuideService - Finished initializing users
+09:14:58.194 [pool-1-thread-1] DEBUG tourGuide.tracker.Tracker - Begin Tracker. Tracking 10000 users.
+highVolumeTrackLocation: Time Elapsed: 846 seconds.
 ]]></system-out>
-  <system-err><![CDATA[Aug 28, 2026 2:28:07 PM org.javamoney.moneta.DefaultMonetaryContextFactory createMonetaryContextNonNullConfig
+  <system-err><![CDATA[Sep 02, 2026 9:14:57 AM org.javamoney.moneta.DefaultMonetaryContextFactory createMonetaryContextNonNullConfig
 INFO: Using custom MathContext: precision=256, roundingMode=HALF_EVEN
 ]]></system-err>
 </testsuite>
