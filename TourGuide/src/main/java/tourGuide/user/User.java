@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
@@ -14,8 +15,13 @@ public class User {
 	private String phoneNumber;
 	private String emailAddress;
 	private Date latestLocationTimestamp;
-	private List<VisitedLocation> visitedLocations = new ArrayList<>();
-	private List<UserReward> userRewards = new ArrayList<>();
+	// Switched from ArrayList to CopyOnWriteArrayList: these fields are read
+	// often (stream()/size()) and written rarely, and can now be touched by
+	// multiple threads at once (trackUserLocationAsync, the background Tracker,
+	// direct REST calls). CopyOnWriteArrayList avoids ConcurrentModificationException
+	// in that case without penalizing reads the way a synchronizedList would.
+	private List<VisitedLocation> visitedLocations = new CopyOnWriteArrayList<>();
+	private List<UserReward> userRewards = new CopyOnWriteArrayList<>();
 	private UserPreferences userPreferences = new UserPreferences();
 	private List<Provider> tripDeals = new ArrayList<>();
 	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
@@ -24,19 +30,19 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
 	}
-	
+
 	public UUID getUserId() {
 		return userId;
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
-	
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -44,45 +50,50 @@ public class User {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
-	
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
-	
+
 	public void setLatestLocationTimestamp(Date latestLocationTimestamp) {
 		this.latestLocationTimestamp = latestLocationTimestamp;
 	}
-	
+
 	public Date getLatestLocationTimestamp() {
 		return latestLocationTimestamp;
 	}
-	
+
 	public void addToVisitedLocations(VisitedLocation visitedLocation) {
 		visitedLocations.add(visitedLocation);
 	}
-	
+
 	public List<VisitedLocation> getVisitedLocations() {
 		return visitedLocations;
 	}
-	
+
 	public void clearVisitedLocations() {
 		visitedLocations.clear();
 	}
-	
+
 	public void addUserReward(UserReward userReward) {
-		if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
+		// Compare attraction names as String-to-String (the original code compared
+		// a String to an Attraction object, which never matched — this silently
+		// blocked every reward after the first one ever added).
+		boolean alreadyRewarded = userRewards.stream()
+				.anyMatch(r -> r.attraction.attractionName.equals(userReward.attraction.attractionName));
+		if (!alreadyRewarded) {
 			userRewards.add(userReward);
 		}
 	}
-	
+
 	public List<UserReward> getUserRewards() {
 		return userRewards;
 	}
-	
+
 	public UserPreferences getUserPreferences() {
 		return userPreferences;
 	}
-	
+
 	public void setUserPreferences(UserPreferences userPreferences) {
 		this.userPreferences = userPreferences;
 	}
@@ -90,11 +101,11 @@ public class User {
 	public VisitedLocation getLastVisitedLocation() {
 		return visitedLocations.get(visitedLocations.size() - 1);
 	}
-	
+
 	public void setTripDeals(List<Provider> tripDeals) {
 		this.tripDeals = tripDeals;
 	}
-	
+
 	public List<Provider> getTripDeals() {
 		return tripDeals;
 	}

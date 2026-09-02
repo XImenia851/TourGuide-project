@@ -23,6 +23,7 @@ import gpsUtil.location.VisitedLocation;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
+import tourGuide.user.UserPreferences;
 import tourGuide.user.UserReward;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
@@ -96,6 +97,15 @@ public class TourGuideService {
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
 		return visitedLocation;
+	}
+
+	// Applies new travel preferences to a user. Needed because nothing in the
+// original codebase ever called User.setUserPreferences() - every trip
+// deal was silently priced against the hardcoded UserPreferences defaults,
+// regardless of the actual user.
+	public UserPreferences updateUserPreferences(User user, UserPreferences preferences) {
+		user.setUserPreferences(preferences);
+		return preferences;
 	}
 
 	// Async wrapper around trackUserLocation(), submitted to the dedicated thread pool.
