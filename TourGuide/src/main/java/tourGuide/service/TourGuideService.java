@@ -23,9 +23,16 @@ import gpsUtil.location.VisitedLocation;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
+import tourGuide.user.UserPreferences;
 import tourGuide.user.UserReward;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
+
+
+//added import
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 public class TourGuideService {
@@ -34,6 +41,8 @@ public class TourGuideService {
 	private final RewardsService rewardsService;
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
+	//NEW
+	private final ExecutorService trackingExecutor = Executors.newFixedThreadPool(50);
 	boolean testMode = true;
 	
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
@@ -82,12 +91,28 @@ public class TourGuideService {
 		user.setTripDeals(providers);
 		return providers;
 	}
-	
+
 	public VisitedLocation trackUserLocation(User user) {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
 		return visitedLocation;
+	}
+
+	// Applies new travel preferences to a user. Needed because nothing in the
+// original codebase ever called User.setUserPreferences() - every trip
+// deal was silently priced against the hardcoded UserPreferences defaults,
+// regardless of the actual user.
+	public UserPreferences updateUserPreferences(User user, UserPreferences preferences) {
+		user.setUserPreferences(preferences);
+		return preferences;
+	}
+
+	// Async wrapper around trackUserLocation(), submitted to the dedicated thread pool.
+	// Used for high-volume batch processing (see TestPerformance); the synchronous
+	// trackUserLocation() above is kept unchanged for the REST controller and the Tracker.
+	public CompletableFuture<VisitedLocation> trackUserLocationAsync(User user) {
+		return CompletableFuture.supplyAsync(() -> trackUserLocation(user), trackingExecutor);
 	}
 
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
@@ -100,13 +125,20 @@ public class TourGuideService {
 		
 		return nearbyAttractions;
 	}
-	
+
 	private void addShutDownHook() {
-		Runtime.getRuntime().addShutdownHook(new Thread() { 
-		      public void run() {
-		        tracker.stopTracking();
-		      } 
-		    }); 
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				tracker.stopTracking();
+				shutdownExecutor();
+			}
+		});
+	}
+
+	// Cleanly shuts down the tracking thread pool. Must be called once batch processing
+	// is finished (see TestPerformance), otherwise the pool's threads stay alive.
+	public void shutdownExecutor() {
+		trackingExecutor.shutdown();
 	}
 	
 	/**********************************************************************************
