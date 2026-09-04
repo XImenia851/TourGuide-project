@@ -8,3 +8,5 @@
  */
 
 rootProject.name = 'TourGuide'
+include 'gpsutil-service'
+include 'gpsutil-service'
