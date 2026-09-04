@@ -77,6 +77,7 @@ public class TourGuideService {
 	public List<User> getAllUsers() {
 		return internalUserMap.values().stream().collect(Collectors.toList());
 	}
+
 	
 	public void addUser(User user) {
 		if(!internalUserMap.containsKey(user.getUserName())) {
@@ -134,6 +135,21 @@ public class TourGuideService {
 						rewardsService.getRewardPoints(attraction, user)))
 				.collect(Collectors.toList());
 	}
+
+
+	// Returns each user's most recent known location, read from their stored
+	// visited-location history (per spec: no fresh gpsUtil call here - gpsUtil
+	// is only used upstream, by trackUserLocation, to populate that history).
+	public Map<String, Location> getAllCurrentLocations() {
+		Map<String, Location> currentLocations = new HashMap<>();
+		for (User user : getAllUsers()) {
+			if (!user.getVisitedLocations().isEmpty()) {
+				currentLocations.put(user.getUserId().toString(), user.getLastVisitedLocation().location);
+			}
+		}
+		return currentLocations;
+	}
+
 
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() {

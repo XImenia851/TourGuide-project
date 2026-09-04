@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,70 +13,100 @@ import com.jsoniter.output.JsonStream;
 import gpsUtil.location.VisitedLocation;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
+import tourGuide.user.UserPreferences;
 import tripPricer.Provider;
 
 @RestController
-<span class="nc" id="L18">public class TourGuideController {</span>
+<span class="nc" id="L20">public class TourGuideController {</span>
 
-	@Autowired
-	TourGuideService tourGuideService;
-	
+    @Autowired
+    TourGuideService tourGuideService;
+
     @RequestMapping(&quot;/&quot;)
     public String index() {
-<span class="nc" id="L25">        return &quot;Greetings from TourGuide!&quot;;</span>
+<span class="nc" id="L27">        return &quot;Greetings from TourGuide!&quot;;</span>
     }
-    
-    @RequestMapping(&quot;/getLocation&quot;) 
+
+    @RequestMapping(&quot;/getLocation&quot;)
     public String getLocation(@RequestParam String userName) {
-<span class="nc" id="L30">    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
-<span class="nc" id="L31">		return JsonStream.serialize(visitedLocation.location);</span>
+<span class="nc" id="L32">        VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
+<span class="nc" id="L33">        return JsonStream.serialize(visitedLocation.location);</span>
     }
-    
+
     //  TODO: Change this method to no longer return a List of Attractions.
- 	//  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
- 	//  Return a new JSON object that contains:
-    	// Name of Tourist attraction, 
-        // Tourist attractions lat/long, 
-        // The user's location lat/long, 
-        // The distance in miles between the user's location and each of the attractions.
-        // The reward points for visiting each Attraction.
-        //    Note: Attraction reward points can be gathered from RewardsCentral
-    @RequestMapping(&quot;/getNearbyAttractions&quot;) 
+    //  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
+    //  Return a new JSON object that contains:
+    // Name of Tourist attraction,
+    // Tourist attractions lat/long,
+    // The user's location lat/long,
+    // The distance in miles between the user's location and each of the attractions.
+    // The reward points for visiting each Attraction.
+    //    Note: Attraction reward points can be gathered from RewardsCentral
+    @RequestMapping(&quot;/getNearbyAttractions&quot;)
     public String getNearbyAttractions(@RequestParam String userName) {
-<span class="nc" id="L45">    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
-<span class="nc" id="L46">    	return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));</span>
+<span class="nc" id="L47">        User user = getUser(userName);</span>
+<span class="nc" id="L48">        VisitedLocation visitedLocation = tourGuideService.getUserLocation(user);</span>
+<span class="nc" id="L49">        return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation, user));</span>
     }
-    
-    @RequestMapping(&quot;/getRewards&quot;) 
+
+    @RequestMapping(&quot;/getRewards&quot;)
     public String getRewards(@RequestParam String userName) {
-<span class="nc" id="L51">    	return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));</span>
+<span class="nc" id="L54">        return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));</span>
     }
-    
+
+    // TODO: Get a list of every user's most recent location as JSON
+    //- Note: does not use gpsUtil to query for their current location,
+    //        but rather gathers the user's current location from their stored location history.
+    //
+    // Return object should be the just a JSON mapping of userId to Locations similar to:
+    //     {
+    //        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371}
+    //        ...
+    //     }
     @RequestMapping(&quot;/getAllCurrentLocations&quot;)
     public String getAllCurrentLocations() {
-    	// TODO: Get a list of every user's most recent location as JSON
-    	//- Note: does not use gpsUtil to query for their current location, 
-    	//        but rather gathers the user's current location from their stored location history.
-    	//
-    	// Return object should be the just a JSON mapping of userId to Locations similar to:
-    	//     {
-    	//        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371} 
-    	//        ...
-    	//     }
-    	
-<span class="nc" id="L66">    	return JsonStream.serialize(&quot;&quot;);</span>
+<span class="nc" id="L68">        return JsonStream.serialize(tourGuideService.getAllCurrentLocations());</span>
     }
-    
+
     @RequestMapping(&quot;/getTripDeals&quot;)
     public String getTripDeals(@RequestParam String userName) {
-<span class="nc" id="L71">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(getUser(userName));</span>
-<span class="nc" id="L72">    	return JsonStream.serialize(providers);</span>
+<span class="nc" id="L73">        List&lt;Provider&gt; providers = tourGuideService.getTripDeals(getUser(userName));</span>
+<span class="nc" id="L74">        return JsonStream.serialize(providers);</span>
     }
-    
+
+    // New endpoint: nothing in the original codebase ever let a user's real
+    // preferences (trip duration, number of children, etc.) reach TripPricer -
+    // every trip deal was silently priced against the hardcoded defaults.
+    @RequestMapping(method = RequestMethod.PUT, value = &quot;/updatePreferences&quot;)
+    public String updatePreferences(@RequestParam String userName,
+                                    @RequestParam(required = false) Integer tripDuration,
+                                    @RequestParam(required = false) Integer ticketQuantity,
+                                    @RequestParam(required = false) Integer numberOfAdults,
+                                    @RequestParam(required = false) Integer numberOfChildren) {
+<span class="nc" id="L86">        User user = getUser(userName);</span>
+<span class="nc" id="L87">        UserPreferences preferences = user.getUserPreferences();</span>
+
+        // Only overwrite fields the caller actually provided; keep defaults for the rest.
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (tripDuration != null) {</span>
+<span class="nc" id="L91">            preferences.setTripDuration(tripDuration);</span>
+        }
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (ticketQuantity != null) {</span>
+<span class="nc" id="L94">            preferences.setTicketQuantity(ticketQuantity);</span>
+        }
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (numberOfAdults != null) {</span>
+<span class="nc" id="L97">            preferences.setNumberOfAdults(numberOfAdults);</span>
+        }
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (numberOfChildren != null) {</span>
+<span class="nc" id="L100">            preferences.setNumberOfChildren(numberOfChildren);</span>
+        }
+
+<span class="nc" id="L103">        tourGuideService.updateUserPreferences(user, preferences);</span>
+<span class="nc" id="L104">        return JsonStream.serialize(preferences);</span>
+    }
+
     private User getUser(String userName) {
-<span class="nc" id="L76">    	return tourGuideService.getUser(userName);</span>
+<span class="nc" id="L108">        return tourGuideService.getUser(userName);</span>
     }
-   
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
