@@ -63,23 +63,26 @@ public class RewardsService {
 	private boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
 <span class="fc bfc" id="L64" title="All 2 branches covered.">		return getDistance(attraction, visitedLocation.location) &gt; proximityBuffer ? false : true;</span>
 	}
-	
-	private int getRewardPoints(Attraction attraction, User user) {
-<span class="fc" id="L68">		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());</span>
+
+	// Made public: needed by TourGuideService to compute reward points for the
+// 5 nearest attractions without going through calculateRewards() (which
+// also mutates the user's saved rewards - we only want to read a value here).
+	public int getRewardPoints(Attraction attraction, User user) {
+<span class="fc" id="L71">		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());</span>
 	}
 	
 	public double getDistance(Location loc1, Location loc2) {
-<span class="fc" id="L72">        double lat1 = Math.toRadians(loc1.latitude);</span>
-<span class="fc" id="L73">        double lon1 = Math.toRadians(loc1.longitude);</span>
-<span class="fc" id="L74">        double lat2 = Math.toRadians(loc2.latitude);</span>
-<span class="fc" id="L75">        double lon2 = Math.toRadians(loc2.longitude);</span>
+<span class="fc" id="L75">        double lat1 = Math.toRadians(loc1.latitude);</span>
+<span class="fc" id="L76">        double lon1 = Math.toRadians(loc1.longitude);</span>
+<span class="fc" id="L77">        double lat2 = Math.toRadians(loc2.latitude);</span>
+<span class="fc" id="L78">        double lon2 = Math.toRadians(loc2.longitude);</span>
 
-<span class="fc" id="L77">        double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)</span>
-<span class="fc" id="L78">                               + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));</span>
+<span class="fc" id="L80">        double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)</span>
+<span class="fc" id="L81">                               + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));</span>
 
-<span class="fc" id="L80">        double nauticalMiles = 60 * Math.toDegrees(angle);</span>
-<span class="fc" id="L81">        double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;</span>
-<span class="fc" id="L82">        return statuteMiles;</span>
+<span class="fc" id="L83">        double nauticalMiles = 60 * Math.toDegrees(angle);</span>
+<span class="fc" id="L84">        double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;</span>
+<span class="fc" id="L85">        return statuteMiles;</span>
 	}
 
 }

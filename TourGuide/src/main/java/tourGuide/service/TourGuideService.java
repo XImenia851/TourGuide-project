@@ -77,6 +77,7 @@ public class TourGuideService {
 	public List<User> getAllUsers() {
 		return internalUserMap.values().stream().collect(Collectors.toList());
 	}
+
 	
 	public void addUser(User user) {
 		if(!internalUserMap.containsKey(user.getUserName())) {
@@ -115,16 +116,40 @@ public class TourGuideService {
 		return CompletableFuture.supplyAsync(() -> trackUserLocation(user), trackingExecutor);
 	}
 
-	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for(Attraction attraction : gpsUtil.getAttractions()) {
-			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
+	// Returns the 5 closest attractions to the user's last known location,
+	// regardless of how far away they are (the old version filtered by a
+	// fixed 200-mile radius, which could return zero results).
+	public List<NearbyAttraction> getNearByAttractions(VisitedLocation visitedLocation, User user) {
+		return gpsUtil.getAttractions().stream()
+				.sorted((a1, a2) -> Double.compare(
+						rewardsService.getDistance(a1, visitedLocation.location),
+						rewardsService.getDistance(a2, visitedLocation.location)))
+				.limit(5)
+				.map(attraction -> new NearbyAttraction(
+						attraction.attractionName,
+						attraction.latitude,
+						attraction.longitude,
+						visitedLocation.location.latitude,
+						visitedLocation.location.longitude,
+						rewardsService.getDistance(attraction, visitedLocation.location),
+						rewardsService.getRewardPoints(attraction, user)))
+				.collect(Collectors.toList());
+	}
+
+
+	// Returns each user's most recent known location, read from their stored
+	// visited-location history (per spec: no fresh gpsUtil call here - gpsUtil
+	// is only used upstream, by trackUserLocation, to populate that history).
+	public Map<String, Location> getAllCurrentLocations() {
+		Map<String, Location> currentLocations = new HashMap<>();
+		for (User user : getAllUsers()) {
+			if (!user.getVisitedLocations().isEmpty()) {
+				currentLocations.put(user.getUserId().toString(), user.getLastVisitedLocation().location);
 			}
 		}
-		
-		return nearbyAttractions;
+		return currentLocations;
 	}
+
 
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -184,5 +209,31 @@ public class TourGuideService {
 		LocalDateTime localDateTime = LocalDateTime.now().minusDays(new Random().nextInt(30));
 	    return Date.from(localDateTime.toInstant(ZoneOffset.UTC));
 	}
-	
+
+
+	// Bundles everything the spec asks for about one nearby attraction: its
+	// name/location, the user's location, the distance between them, and the
+	// reward points for that attraction. A static nested class keeps this
+	// data holder local to TourGuideService instead of adding a new file.
+	public static class NearbyAttraction {
+		public String attractionName;
+		public double attractionLatitude;
+		public double attractionLongitude;
+		public double userLatitude;
+		public double userLongitude;
+		public double distanceInMiles;
+		public int rewardPoints;
+
+		public NearbyAttraction(String attractionName, double attractionLatitude, double attractionLongitude,
+								double userLatitude, double userLongitude, double distanceInMiles, int rewardPoints) {
+			this.attractionName = attractionName;
+			this.attractionLatitude = attractionLatitude;
+			this.attractionLongitude = attractionLongitude;
+			this.userLatitude = userLatitude;
+			this.userLongitude = userLongitude;
+			this.distanceInMiles = distanceInMiles;
+			this.rewardPoints = rewardPoints;
+		}
+	}
+
 }

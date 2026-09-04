@@ -63,8 +63,11 @@ public class RewardsService {
 	private boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
 		return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
 	}
-	
-	private int getRewardPoints(Attraction attraction, User user) {
+
+	// Made public: needed by TourGuideService to compute reward points for the
+// 5 nearest attractions without going through calculateRewards() (which
+// also mutates the user's saved rewards - we only want to read a value here).
+	public int getRewardPoints(Attraction attraction, User user) {
 		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
 	}
 	
