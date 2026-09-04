@@ -1,2 +1,25 @@
-// Placeholder build file for the gpsUtil microservice.
-// Real dependencies and Spring Boot config will be added in the next step.
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile files('../libs/gpsUtil.jar')
+    compile group: 'com.jsoniter', name: 'jsoniter', version: '0.9.23'
+}

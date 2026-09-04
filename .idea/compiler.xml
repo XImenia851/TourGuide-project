@@ -3,6 +3,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="TourGuide" options="-parameters" />
+      <module name="TourGuide.gpsutil-service" options="-parameters" />
+      <module name="TourGuide.gpsutil-service.main" options="-parameters" />
+      <module name="TourGuide.gpsutil-service.test" options="-parameters" />
       <module name="TourGuide.main" options="-parameters" />
       <module name="TourGuide.test" options="-parameters" />
     </option>
