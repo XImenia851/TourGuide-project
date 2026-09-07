@@ -7,6 +7,9 @@
       <module name="TourGuide.gpsutil-service.main" options="-parameters" />
       <module name="TourGuide.gpsutil-service.test" options="-parameters" />
       <module name="TourGuide.main" options="-parameters" />
+      <module name="TourGuide.rewardscentral-service" options="-parameters" />
+      <module name="TourGuide.rewardscentral-service.main" options="-parameters" />
+      <module name="TourGuide.rewardscentral-service.test" options="-parameters" />
       <module name="TourGuide.test" options="-parameters" />
     </option>
   </component>
