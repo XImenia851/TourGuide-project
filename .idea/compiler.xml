@@ -11,6 +11,9 @@
       <module name="TourGuide.rewardscentral-service.main" options="-parameters" />
       <module name="TourGuide.rewardscentral-service.test" options="-parameters" />
       <module name="TourGuide.test" options="-parameters" />
+      <module name="TourGuide.trippricer-service" options="-parameters" />
+      <module name="TourGuide.trippricer-service.main" options="-parameters" />
+      <module name="TourGuide.trippricer-service.test" options="-parameters" />
     </option>
   </component>
 </project>
