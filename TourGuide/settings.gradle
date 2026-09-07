@@ -9,4 +9,5 @@
 
 rootProject.name = 'TourGuide'
 include 'gpsutil-service'
-include 'gpsutil-service'
+include 'rewardscentral-service'
+include 'trippricer-service'
