@@ -1,79 +1,92 @@
-Ü10:41:33.463 [Test worker] DEBUG io.netty.util.internal.logging.InternalLoggerFactory - Using SLF4J as the default logging framework
-_10:41:33.513 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - Platform: Windows
-i10:41:33.520 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - -Dio.netty.noUnsafe: false
-^10:41:33.520 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - Java version: 8
-s10:41:33.523 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - sun.misc.Unsafe.theUnsafe: available
-t10:41:33.525 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - sun.misc.Unsafe.copyMemory: available
-q10:41:33.527 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.Buffer.address: available
-s10:41:33.528 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - direct buffer constructor: available
-w10:41:33.530 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.Bits.unaligned: available, true
-£10:41:33.530 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
-Ö10:41:33.530 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.DirectByteBuffer.<init>(long, int): available
-h10:41:33.530 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - sun.misc.Unsafe: available
-ê10:41:33.531 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.tmpdir: C:\Users\Hp\AppData\Local\Temp (java.io.tmpdir)
-z10:41:33.531 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.bitMode: 64 (sun.arch.data.model)
-z10:41:33.534 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.maxDirectMemory: 3773300736 bytes
-Ç10:41:33.534 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.uninitializedArrayAllocationThreshold: -1
-q10:41:33.538 [Test worker] DEBUG io.netty.util.internal.CleanerJava6 - java.nio.ByteBuffer.cleaner(): available
-n10:41:33.538 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.noPreferDirect: false
-\10:41:33.545 [Test worker] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv4Stack: false
-`10:41:33.546 [Test worker] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv6Addresses: false
-|10:41:33.885 [Test worker] DEBUG io.netty.util.NetUtil - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
-í10:41:33.887 [Test worker] DEBUG io.netty.util.NetUtil - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
-e10:41:33.892 [Test worker] DEBUG reactor.util.Loggers$LoggerFactory - Using Slf4j logging framework
-Œ10:41:33.926 [Test worker] DEBUG reactor.netty.tcp.TcpResources - [http] resources will use the default LoopResources: DefaultLoopResources {prefix=reactor-http, daemon=true, selectCount=8, workerCount=8}
-˘10:41:33.926 [Test worker] DEBUG reactor.netty.tcp.TcpResources - [http] resources will use the default ConnectionProvider: PooledConnectionProvider {name=http, poolFactory=reactor.netty.resources.ConnectionProvider$$Lambda$73/1690751419@66b1858d}
-k10:41:34.151 [Test worker] DEBUG reactor.netty.resources.DefaultLoopEpoll - Default Epoll support : false
-m10:41:34.153 [Test worker] DEBUG reactor.netty.resources.DefaultLoopKQueue - Default KQueue support : false
-o10:41:34.164 [Test worker] DEBUG io.netty.channel.MultithreadEventLoopGroup - -Dio.netty.eventLoopThreads: 16
-å10:41:34.209 [Test worker] DEBUG io.netty.util.internal.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
-à10:41:34.210 [Test worker] DEBUG io.netty.util.internal.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
-m10:41:34.227 [Test worker] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.noKeySetOptimization: false
-s10:41:34.227 [Test worker] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.selectorAutoRebuildThreshold: 512
-10:41:34.250 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - org.jctools-core.MpscChunkedArrayQueue: available
-†10:41:34.481 [Test worker] DEBUG org.springframework.web.reactive.function.client.ExchangeFunctions - [625c3f4d] HTTP GET http://localhost:8081/getAttractions
-à10:41:34.503 [Test worker] DEBUG reactor.netty.resources.PooledConnectionProvider - Creating new client pool [http] for localhost:8081
-q10:41:34.520 [Test worker] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.processId: 4260 (auto-detected)
-Ñ10:41:34.867 [Test worker] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.machineId: 4c:1d:96:ff:fe:62:c9:65 (auto-detected)
-n10:41:34.889 [Test worker] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple
-q10:41:34.889 [Test worker] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.targetRecords: 4
-r10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numHeapArenas: 16
-t10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numDirectArenas: 16
-o10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.pageSize: 8192
-m10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxOrder: 11
-t10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.chunkSize: 16777216
-s10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.tinyCacheSize: 512
-t10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.smallCacheSize: 256
-t10:41:34.944 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.normalCacheSize: 64
-10:41:34.945 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
-x10:41:34.945 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.cacheTrimInterval: 8192
-{10:41:34.945 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.cacheTrimIntervalMillis: 0
-|10:41:34.945 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.useCacheForAllThreads: true
-É10:41:34.945 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxCachedByteBuffersPerChunk: 1023
-b10:41:34.964 [Test worker] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.allocator.type: pooled
-j10:41:34.964 [Test worker] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.threadLocalDirectBufferSize: 0
-o10:41:34.967 [Test worker] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.maxThreadLocalCharBufferSize: 16384
-Ω10:41:34.986 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1] Created new pooled channel, now 0 active connections and 1 inactive connections
-s10:41:35.046 [reactor-http-nio-4] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkAccessible: true
-o10:41:35.047 [reactor-http-nio-4] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkBounds: true
-¶10:41:35.050 [reactor-http-nio-4] DEBUG io.netty.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@46278779
-∫10:41:35.065 [reactor-http-nio-4] DEBUG reactor.netty.channel.BootstrapHandlers - [id: 0xcf55d9c1] Initialized pipeline DefaultChannelPipeline{(BootstrapHandlers$BootstrapInitializerHandler#0 = reactor.netty.channel.BootstrapHandlers$BootstrapInitializerHandler), (SimpleChannelPool$1#0 = io.netty.channel.pool.SimpleChannelPool$1), (reactor.left.httpCodec = io.netty.handler.codec.http.HttpClientCodec), (reactor.left.decompressor = io.netty.handler.codec.http.HttpContentDecompressor), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
-ñ10:41:35.083 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] onStateChange(PooledConnection{channel=[id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081]}, [connected])
-Æ10:41:35.109 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/, connection=PooledConnection{channel=[id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081]}}, [configured])
-“10:41:35.115 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Registering pool release on close event for channel
-Í10:41:35.121 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientConnect - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Handler is being applied: {uri=http://localhost:8081/getAttractions, method=GET}
-q10:41:35.165 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxCapacityPerThread: 4096
-q10:41:35.165 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxSharedCapacityFactor: 2
-g10:41:35.165 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.linkCapacity: 16
-_10:41:35.165 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.ratio: 8
-æ10:41:35.190 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getAttractions, connection=PooledConnection{channel=[id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081]}}, [request_sent])
-Â10:41:35.191 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Channel connected, now 1 active connections and 0 inactive connections
-£10:41:35.226 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientOperations - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Received response (auto-read:false) : [Content-Type=text/plain;charset=UTF-8, Content-Length=7532, Date=Mon, 07 Sep 2026 08:41:35 GMT]
-√10:41:35.227 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getAttractions, connection=PooledConnection{channel=[id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081]}}, [response_received])
-â10:41:35.233 [reactor-http-nio-4] DEBUG org.springframework.web.reactive.function.client.ExchangeFunctions - [625c3f4d] Response 200 OK
-ﬁ10:41:35.266 [reactor-http-nio-4] DEBUG reactor.netty.channel.FluxReceive - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Subscribing inbound receiver [pending: 0, cancelled:false, inboundDone: false]
-∂10:41:35.278 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientOperations - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Received last HTTP packet
-ﬂ10:41:35.286 [reactor-http-nio-4] DEBUG org.springframework.core.codec.StringDecoder - [625c3f4d] Decoded "[{"attractionName":"Disneyland","city":"Anaheim","state":"CA","attractionId":{"mostSigBits":3266891 (truncated)...
-ø10:41:35.287 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getAttractions, connection=PooledConnection{channel=[id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081]}}, [disconnecting])
-∞10:41:35.287 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Releasing channel
-„10:41:35.287 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0xcf55d9c1, L:/127.0.0.1:52824 - R:localhost/127.0.0.1:8081] Channel cleaned, now 0 active connections and 1 inactive connections
+Ü14:26:22.909 [Test worker] DEBUG io.netty.util.internal.logging.InternalLoggerFactory - Using SLF4J as the default logging framework
+_14:26:22.978 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - Platform: Windows
+i14:26:22.983 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - -Dio.netty.noUnsafe: false
+^14:26:22.983 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - Java version: 8
+s14:26:22.985 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - sun.misc.Unsafe.theUnsafe: available
+t14:26:22.986 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - sun.misc.Unsafe.copyMemory: available
+q14:26:22.987 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.Buffer.address: available
+s14:26:22.988 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - direct buffer constructor: available
+w14:26:22.990 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.Bits.unaligned: available, true
+£14:26:22.990 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+Ö14:26:22.990 [Test worker] DEBUG io.netty.util.internal.PlatformDependent0 - java.nio.DirectByteBuffer.<init>(long, int): available
+h14:26:22.990 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - sun.misc.Unsafe: available
+ê14:26:22.992 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.tmpdir: C:\Users\Hp\AppData\Local\Temp (java.io.tmpdir)
+z14:26:22.992 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+z14:26:22.993 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.maxDirectMemory: 3773300736 bytes
+Ç14:26:22.993 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.uninitializedArrayAllocationThreshold: -1
+q14:26:22.995 [Test worker] DEBUG io.netty.util.internal.CleanerJava6 - java.nio.ByteBuffer.cleaner(): available
+n14:26:22.995 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - -Dio.netty.noPreferDirect: false
+\14:26:22.999 [Test worker] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv4Stack: false
+`14:26:22.999 [Test worker] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv6Addresses: false
+|14:26:23.365 [Test worker] DEBUG io.netty.util.NetUtil - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+í14:26:23.367 [Test worker] DEBUG io.netty.util.NetUtil - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
+e14:26:23.372 [Test worker] DEBUG reactor.util.Loggers$LoggerFactory - Using Slf4j logging framework
+Œ14:26:23.410 [Test worker] DEBUG reactor.netty.tcp.TcpResources - [http] resources will use the default LoopResources: DefaultLoopResources {prefix=reactor-http, daemon=true, selectCount=8, workerCount=8}
+˘14:26:23.411 [Test worker] DEBUG reactor.netty.tcp.TcpResources - [http] resources will use the default ConnectionProvider: PooledConnectionProvider {name=http, poolFactory=reactor.netty.resources.ConnectionProvider$$Lambda$73/1504498215@34729815}
+k14:26:23.653 [Test worker] DEBUG reactor.netty.resources.DefaultLoopEpoll - Default Epoll support : false
+m14:26:23.655 [Test worker] DEBUG reactor.netty.resources.DefaultLoopKQueue - Default KQueue support : false
+o14:26:23.667 [Test worker] DEBUG io.netty.channel.MultithreadEventLoopGroup - -Dio.netty.eventLoopThreads: 16
+å14:26:23.714 [Test worker] DEBUG io.netty.util.internal.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+à14:26:23.714 [Test worker] DEBUG io.netty.util.internal.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+m14:26:23.729 [Test worker] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.noKeySetOptimization: false
+s14:26:23.729 [Test worker] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.selectorAutoRebuildThreshold: 512
+14:26:23.757 [Test worker] DEBUG io.netty.util.internal.PlatformDependent - org.jctools-core.MpscChunkedArrayQueue: available
+Ã14:26:23.973 [Test worker] DEBUG org.springframework.web.reactive.function.client.ExchangeFunctions - [20242b1] HTTP GET http://localhost:8081/getUserLocation?userId=65b551f8-9fb0-4b39-84a4-6f7744134050
+à14:26:24.004 [Test worker] DEBUG reactor.netty.resources.PooledConnectionProvider - Creating new client pool [http] for localhost:8081
+r14:26:24.030 [Test worker] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.processId: 12708 (auto-detected)
+Ñ14:26:24.380 [Test worker] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.machineId: 4c:1d:96:ff:fe:62:c9:65 (auto-detected)
+n14:26:24.401 [Test worker] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple
+q14:26:24.401 [Test worker] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.targetRecords: 4
+r14:26:24.457 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numHeapArenas: 16
+t14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numDirectArenas: 16
+o14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.pageSize: 8192
+m14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxOrder: 11
+t14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.chunkSize: 16777216
+s14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.tinyCacheSize: 512
+t14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.smallCacheSize: 256
+t14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.normalCacheSize: 64
+14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+x14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.cacheTrimInterval: 8192
+{14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.cacheTrimIntervalMillis: 0
+|14:26:24.458 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.useCacheForAllThreads: true
+É14:26:24.459 [Test worker] DEBUG io.netty.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxCachedByteBuffersPerChunk: 1023
+b14:26:24.476 [Test worker] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.allocator.type: pooled
+j14:26:24.476 [Test worker] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.threadLocalDirectBufferSize: 0
+o14:26:24.479 [Test worker] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.maxThreadLocalCharBufferSize: 16384
+Ω14:26:24.496 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d] Created new pooled channel, now 0 active connections and 1 inactive connections
+s14:26:24.555 [reactor-http-nio-4] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkAccessible: true
+o14:26:24.556 [reactor-http-nio-4] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkBounds: true
+¶14:26:24.558 [reactor-http-nio-4] DEBUG io.netty.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@15f426ad
+∫14:26:24.572 [reactor-http-nio-4] DEBUG reactor.netty.channel.BootstrapHandlers - [id: 0x2312f15d] Initialized pipeline DefaultChannelPipeline{(BootstrapHandlers$BootstrapInitializerHandler#0 = reactor.netty.channel.BootstrapHandlers$BootstrapInitializerHandler), (SimpleChannelPool$1#0 = io.netty.channel.pool.SimpleChannelPool$1), (reactor.left.httpCodec = io.netty.handler.codec.http.HttpClientCodec), (reactor.left.decompressor = io.netty.handler.codec.http.HttpContentDecompressor), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
+ñ14:26:24.596 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}, [connected])
+Æ14:26:24.634 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [configured])
+“14:26:24.639 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Registering pool release on close event for channel
+ó14:26:24.646 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientConnect - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Handler is being applied: {uri=http://localhost:8081/getUserLocation?userId=65b551f8-9fb0-4b39-84a4-6f7744134050, method=GET}
+q14:26:24.706 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxCapacityPerThread: 4096
+q14:26:24.706 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxSharedCapacityFactor: 2
+g14:26:24.706 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.linkCapacity: 16
+_14:26:24.707 [reactor-http-nio-4] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.ratio: 8
+Î14:26:24.737 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getUserLocation?userId=65b551f8-9fb0-4b39-84a4-6f7744134050, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [request_sent])
+Â14:26:24.738 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Channel connected, now 1 active connections and 0 inactive connections
+£14:26:24.968 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientOperations - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Received response (auto-read:false) : [Content-Type=text/plain;charset=UTF-8, Content-Length=8811, Date=Mon, 07 Sep 2026 12:26:24 GMT]
+14:26:24.968 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getUserLocation?userId=65b551f8-9fb0-4b39-84a4-6f7744134050, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [response_received])
+à14:26:24.974 [reactor-http-nio-4] DEBUG org.springframework.web.reactive.function.client.ExchangeFunctions - [20242b1] Response 200 OK
+ﬁ14:26:25.005 [reactor-http-nio-4] DEBUG reactor.netty.channel.FluxReceive - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Subscribing inbound receiver [pending: 0, cancelled:false, inboundDone: false]
+∂14:26:25.017 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientOperations - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Received last HTTP packet
+ﬁ14:26:25.024 [reactor-http-nio-4] DEBUG org.springframework.core.codec.StringDecoder - [20242b1] Decoded "{"userId":{"mostSigBits":7328854096888220473,"leastSigBits":-8888857206488612784,"leastSignificantB (truncated)...
+Ï14:26:25.025 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getUserLocation?userId=65b551f8-9fb0-4b39-84a4-6f7744134050, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [disconnecting])
+∞14:26:25.025 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Releasing channel
+„14:26:25.026 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Channel cleaned, now 0 active connections and 1 inactive connections
+†14:26:25.074 [Test worker] DEBUG org.springframework.web.reactive.function.client.ExchangeFunctions - [4bdfa250] HTTP GET http://localhost:8081/getAttractions
+‰14:26:25.076 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Channel acquired, now 1 active connections and 0 inactive connections
+Í14:26:25.076 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientConnect - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Handler is being applied: {uri=http://localhost:8081/getAttractions, method=GET}
+æ14:26:25.077 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getAttractions, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [request_sent])
+£14:26:25.097 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientOperations - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Received response (auto-read:false) : [Content-Type=text/plain;charset=UTF-8, Content-Length=7528, Date=Mon, 07 Sep 2026 12:26:24 GMT]
+√14:26:25.098 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getAttractions, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [response_received])
+â14:26:25.098 [reactor-http-nio-4] DEBUG org.springframework.web.reactive.function.client.ExchangeFunctions - [4bdfa250] Response 200 OK
+ﬁ14:26:25.098 [reactor-http-nio-4] DEBUG reactor.netty.channel.FluxReceive - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Subscribing inbound receiver [pending: 0, cancelled:false, inboundDone: false]
+∂14:26:25.098 [reactor-http-nio-4] DEBUG reactor.netty.http.client.HttpClientOperations - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Received last HTTP packet
+ﬂ14:26:25.100 [reactor-http-nio-4] DEBUG org.springframework.core.codec.StringDecoder - [4bdfa250] Decoded "[{"attractionName":"Disneyland","city":"Anaheim","state":"CA","attractionId":{"mostSigBits":5371670 (truncated)...
+ø14:26:25.100 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] onStateChange(GET{uri=/getAttractions, connection=PooledConnection{channel=[id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081]}}, [disconnecting])
+∞14:26:25.100 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Releasing channel
+„14:26:25.100 [reactor-http-nio-4] DEBUG reactor.netty.resources.PooledConnectionProvider - [id: 0x2312f15d, L:/127.0.0.1:54817 - R:localhost/127.0.0.1:8081] Channel cleaned, now 0 active connections and 1 inactive connections
