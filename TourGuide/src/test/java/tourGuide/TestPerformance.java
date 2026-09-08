@@ -23,6 +23,8 @@ import tourGuide.service.RewardsService;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
+import tourGuide.service.GpsUtilWebClient;
+import tourGuide.service.RewardsWebClient;
 
 public class TestPerformance {
 	
@@ -50,8 +52,7 @@ public class TestPerformance {
 @Test
 public void highVolumeTrackLocation() {
 	GpsUtil gpsUtil = new GpsUtil();
-	RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
-
+	RewardsService rewardsService = new RewardsService(new GpsUtilWebClient(), new RewardsWebClient());
 	// Target volume per the spec: 100,000 users within 15 minutes.
 	InternalTestHelper.setInternalUserNumber(100000);
 	TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
@@ -89,7 +90,7 @@ public void highVolumeTrackLocation() {
 	@Test
 	public void highVolumeGetRewards() {
 		GpsUtil gpsUtil = new GpsUtil();
-		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
+		RewardsService rewardsService = new RewardsService(new GpsUtilWebClient(), new RewardsWebClient());
 
 		// Users should be incremented up to 100,000, and test finishes within 20 minutes
 		InternalTestHelper.setInternalUserNumber(100);

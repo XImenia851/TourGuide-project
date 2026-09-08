@@ -4,25 +4,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import gpsUtil.GpsUtil;
-import rewardCentral.RewardCentral;
-import tourGuide.service.RewardsService;
 
 @Configuration
 public class TourGuideModule {
-	
+
+	// GpsUtil bean kept for now - TourGuideService still uses it directly.
+	// Will be removed once TourGuideService is switched to GpsUtilWebClient
+	// in the next step.
 	@Bean
 	public GpsUtil getGpsUtil() {
 		return new GpsUtil();
 	}
-	
-	@Bean
-	public RewardsService getRewardsService() {
-		return new RewardsService(getGpsUtil(), getRewardCentral());
-	}
-	
-	@Bean
-	public RewardCentral getRewardCentral() {
-		return new RewardCentral();
-	}
-	
+
 }
