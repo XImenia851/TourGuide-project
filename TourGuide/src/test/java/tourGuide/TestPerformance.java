@@ -17,7 +17,6 @@ import org.junit.Test;
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
-import rewardCentral.RewardCentral;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.service.RewardsService;
 import tourGuide.service.TourGuideService;
@@ -27,66 +26,65 @@ import tourGuide.service.GpsUtilWebClient;
 import tourGuide.service.RewardsWebClient;
 
 public class TestPerformance {
-	
+
 	/*
 	 * A note on performance improvements:
-	 *     
+	 *
 	 *     The number of users generated for the high volume tests can be easily adjusted via this method:
-	 *     
+	 *
 	 *     		InternalTestHelper.setInternalUserNumber(100000);
-	 *     
-	 *     
+	 *
+	 *
 	 *     These tests can be modified to suit new solutions, just as long as the performance metrics
-	 *     at the end of the tests remains consistent. 
-	 * 
+	 *     at the end of the tests remains consistent.
+	 *
 	 *     These are performance metrics that we are trying to hit:
-	 *     
+	 *
 	 *     highVolumeTrackLocation: 100,000 users within 15 minutes:
 	 *     		assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
-     *
-     *     highVolumeGetRewards: 100,000 users within 20 minutes:
+	 *
+	 *     highVolumeGetRewards: 100,000 users within 20 minutes:
 	 *          assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
-	
-//	@Ignore
-@Test
-public void highVolumeTrackLocation() {
-	GpsUtil gpsUtil = new GpsUtil();
-	RewardsService rewardsService = new RewardsService(new GpsUtilWebClient(), new RewardsWebClient());
-	// Target volume per the spec: 100,000 users within 15 minutes.
-	InternalTestHelper.setInternalUserNumber(100000);
-	TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
-	// Stop the background Tracker right away, before starting the stopwatch.
-	// Otherwise it keeps polling all users every 5 minutes and competes with this
-	// test for the same thread pool, roughly doubling the measured time.
-	tourGuideService.tracker.stopTracking();
+	//	@Ignore
+	@Test
+	public void highVolumeTrackLocation() {
+		RewardsService rewardsService = new RewardsService(new GpsUtilWebClient(), new RewardsWebClient());
+		// Target volume per the spec: 100,000 users within 15 minutes.
+		InternalTestHelper.setInternalUserNumber(100000);
+		TourGuideService tourGuideService = new TourGuideService(new GpsUtilWebClient(), rewardsService);
 
-	List<User> allUsers = tourGuideService.getAllUsers();
+		// Stop the background Tracker right away, before starting the stopwatch.
+		// Otherwise it keeps polling all users every 5 minutes and competes with this
+		// test for the same thread pool, roughly doubling the measured time.
+		tourGuideService.tracker.stopTracking();
 
-	StopWatch stopWatch = new StopWatch();
-	stopWatch.start();
+		List<User> allUsers = tourGuideService.getAllUsers();
 
-	// Fan out: submit every user's location tracking as an async task on the
-	// thread pool. This call returns immediately with 100,000 "promises"
-	// (CompletableFuture), it does not wait for any of them to finish.
-	List<CompletableFuture<VisitedLocation>> futures = allUsers.stream()
-			.map(tourGuideService::trackUserLocationAsync)
-			.collect(Collectors.toList());
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
 
-	// Fan in: block here until every future above has completed.
-	// This is the async equivalent of the old sequential for-loop, except the
-	// actual work ran in parallel across the pool while we were waiting.
-	CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+		// Fan out: submit every user's location tracking as an async task on the
+		// thread pool. This call returns immediately with 100,000 "promises"
+		// (CompletableFuture), it does not wait for any of them to finish.
+		List<CompletableFuture<VisitedLocation>> futures = allUsers.stream()
+				.map(tourGuideService::trackUserLocationAsync)
+				.collect(Collectors.toList());
 
-	stopWatch.stop();
-	// Release the thread pool now that all tasks are done.
-	tourGuideService.shutdownExecutor();
+		// Fan in: block here until every future above has completed.
+		// This is the async equivalent of the old sequential for-loop, except the
+		// actual work ran in parallel across the pool while we were waiting.
+		CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-	System.out.println("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
-	assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
-}
-	
+		stopWatch.stop();
+		// Release the thread pool now that all tasks are done.
+		tourGuideService.shutdownExecutor();
+
+		System.out.println("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
+		assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
+	}
+
 	@Test
 	public void highVolumeGetRewards() {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -96,14 +94,14 @@ public void highVolumeTrackLocation() {
 		InternalTestHelper.setInternalUserNumber(100);
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
-		
-	    Attraction attraction = gpsUtil.getAttractions().get(0);
+		TourGuideService tourGuideService = new TourGuideService(new GpsUtilWebClient(), rewardsService);
+
+		Attraction attraction = gpsUtil.getAttractions().get(0);
 		List<User> allUsers = new ArrayList<>();
 		allUsers = tourGuideService.getAllUsers();
 		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
-	     
-	    allUsers.forEach(u -> rewardsService.calculateRewards(u));
+
+		allUsers.forEach(u -> rewardsService.calculateRewards(u));
 		stopWatch.stop();
 		for(User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);
@@ -111,8 +109,8 @@ public void highVolumeTrackLocation() {
 
 		tourGuideService.tracker.stopTracking();
 
-		System.out.println("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds."); 
+		System.out.println("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
 		assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	}
-	
+
 }
