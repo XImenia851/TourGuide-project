@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TripPricerWebClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TourGuide-ms</a> &gt; <a href="index.source.html" class="el_package">tourGuide.service</a> &gt; <span class="el_source">TripPricerWebClient.java</span></div><h1>TripPricerWebClient.java</h1><pre class="source lang-java linenums">package tourGuide.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.jsoniter.JsonIterator;
+import com.jsoniter.any.Any;
+
+import tripPricer.Provider;
+
+@Service
+<span class="fc" id="L16">public class TripPricerWebClient {</span>
+
+<span class="fc" id="L18">    private final WebClient webClient = WebClient.create(&quot;http://localhost:8083&quot;);</span>
+
+    public List&lt;Provider&gt; getPrice(String apiKey, UUID userId, int numberOfAdults, int numberOfChildren,
+                                   int tripDuration, int rewardPoints) {
+<span class="nc" id="L22">        String json = webClient.get()</span>
+<span class="nc" id="L23">                .uri(uriBuilder -&gt; uriBuilder.path(&quot;/getPrice&quot;)</span>
+<span class="nc" id="L24">                        .queryParam(&quot;apiKey&quot;, apiKey)</span>
+<span class="nc" id="L25">                        .queryParam(&quot;userId&quot;, userId)</span>
+<span class="nc" id="L26">                        .queryParam(&quot;numberOfAdults&quot;, numberOfAdults)</span>
+<span class="nc" id="L27">                        .queryParam(&quot;numberOfChildren&quot;, numberOfChildren)</span>
+<span class="nc" id="L28">                        .queryParam(&quot;tripDuration&quot;, tripDuration)</span>
+<span class="nc" id="L29">                        .queryParam(&quot;rewardPoints&quot;, rewardPoints)</span>
+<span class="nc" id="L30">                        .build())</span>
+<span class="nc" id="L31">                .retrieve()</span>
+<span class="nc" id="L32">                .bodyToMono(String.class)</span>
+<span class="nc" id="L33">                .block();</span>
+
+        // Provider has no no-arg constructor either (same situation as
+        // Attraction) - parse generically with Any and rebuild manually.
+<span class="nc" id="L37">        Any providersJson = JsonIterator.deserialize(json);</span>
+<span class="nc" id="L38">        List&lt;Provider&gt; providers = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for (Any item : providersJson.asList()) {</span>
+<span class="nc" id="L40">            UUID tripId = new UUID(</span>
+<span class="nc" id="L41">                    item.get(&quot;tripId&quot;, &quot;mostSigBits&quot;).toLong(),</span>
+<span class="nc" id="L42">                    item.get(&quot;tripId&quot;, &quot;leastSigBits&quot;).toLong());</span>
+<span class="nc" id="L43">            Provider provider = new Provider(tripId, item.get(&quot;name&quot;).toString(), item.get(&quot;price&quot;).toDouble());</span>
+<span class="nc" id="L44">            providers.add(provider);</span>
+<span class="nc" id="L45">        }</span>
+<span class="nc" id="L46">        return providers;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

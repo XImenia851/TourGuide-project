@@ -36,7 +36,11 @@ public class TourGuideService {
 	private final RewardsService rewardsService;
 	private final TripPricerWebClient tripPricerWebClient = new TripPricerWebClient();
 	public final Tracker tracker;
-	private final ExecutorService trackingExecutor = Executors.newFixedThreadPool(50);
+	// Bumped from 50 to 150: with the microservices split, each task now
+// waits on 2 real network round-trips (gpsUtil + rewardCentral) instead
+// of doing pure in-memory work, so the bottleneck shifted from CPU to
+// I/O wait - more concurrent threads help more here than they did before.
+	private final ExecutorService trackingExecutor = Executors.newFixedThreadPool(150);
 	boolean testMode = true;
 
 	public TourGuideService(GpsUtilWebClient gpsUtilWebClient, RewardsService rewardsService) {

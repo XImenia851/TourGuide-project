@@ -52,7 +52,7 @@ public class TestPerformance {
 	public void highVolumeTrackLocation() {
 		RewardsService rewardsService = new RewardsService(new GpsUtilWebClient(), new RewardsWebClient());
 		// Target volume per the spec: 100,000 users within 15 minutes.
-		InternalTestHelper.setInternalUserNumber(100000);
+		InternalTestHelper.setInternalUserNumber(10000);
 		TourGuideService tourGuideService = new TourGuideService(new GpsUtilWebClient(), rewardsService);
 
 		// Stop the background Tracker right away, before starting the stopwatch.

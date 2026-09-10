@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TourGuide-ms</a> &gt; <a href="index.source.html" class="el_package">tourGuide.user</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package tourGuide.user;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import gpsUtil.location.VisitedLocation;
+import tripPricer.Provider;
+
+public class User {
+	private final UUID userId;
+	private final String userName;
+	private String phoneNumber;
+	private String emailAddress;
+	private Date latestLocationTimestamp;
+	// Switched from ArrayList to CopyOnWriteArrayList: these fields are read
+	// often (stream()/size()) and written rarely, and can now be touched by
+	// multiple threads at once (trackUserLocationAsync, the background Tracker,
+	// direct REST calls). CopyOnWriteArrayList avoids ConcurrentModificationException
+	// in that case without penalizing reads the way a synchronizedList would.
+<span class="fc" id="L23">	private List&lt;VisitedLocation&gt; visitedLocations = new CopyOnWriteArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">	private List&lt;UserReward&gt; userRewards = new CopyOnWriteArrayList&lt;&gt;();</span>
+<span class="fc" id="L25">	private UserPreferences userPreferences = new UserPreferences();</span>
+<span class="fc" id="L26">	private List&lt;Provider&gt; tripDeals = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L28">	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {</span>
+<span class="fc" id="L29">		this.userId = userId;</span>
+<span class="fc" id="L30">		this.userName = userName;</span>
+<span class="fc" id="L31">		this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L32">		this.emailAddress = emailAddress;</span>
+<span class="fc" id="L33">	}</span>
+
+	public UUID getUserId() {
+<span class="fc" id="L36">		return userId;</span>
+	}
+
+	public String getUserName() {
+<span class="nc" id="L40">		return userName;</span>
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+<span class="nc" id="L44">		this.phoneNumber = phoneNumber;</span>
+<span class="nc" id="L45">	}</span>
+
+	public String getPhoneNumber() {
+<span class="nc" id="L48">		return phoneNumber;</span>
+	}
+
+	public void setEmailAddress(String emailAddress) {
+<span class="nc" id="L52">		this.emailAddress = emailAddress;</span>
+<span class="nc" id="L53">	}</span>
+
+	public String getEmailAddress() {
+<span class="nc" id="L56">		return emailAddress;</span>
+	}
+
+	public void setLatestLocationTimestamp(Date latestLocationTimestamp) {
+<span class="nc" id="L60">		this.latestLocationTimestamp = latestLocationTimestamp;</span>
+<span class="nc" id="L61">	}</span>
+
+	public Date getLatestLocationTimestamp() {
+<span class="nc" id="L64">		return latestLocationTimestamp;</span>
+	}
+
+	public void addToVisitedLocations(VisitedLocation visitedLocation) {
+<span class="fc" id="L68">		visitedLocations.add(visitedLocation);</span>
+<span class="fc" id="L69">	}</span>
+
+	public List&lt;VisitedLocation&gt; getVisitedLocations() {
+<span class="fc" id="L72">		return visitedLocations;</span>
+	}
+
+	public void clearVisitedLocations() {
+<span class="nc" id="L76">		visitedLocations.clear();</span>
+<span class="nc" id="L77">	}</span>
+
+	public void addUserReward(UserReward userReward) {
+		// Compare attraction names as String-to-String (the original code compared
+		// a String to an Attraction object, which never matched — this silently
+		// blocked every reward after the first one ever added).
+<span class="fc" id="L83">		boolean alreadyRewarded = userRewards.stream()</span>
+<span class="fc" id="L84">				.anyMatch(r -&gt; r.attraction.attractionName.equals(userReward.attraction.attractionName));</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">		if (!alreadyRewarded) {</span>
+<span class="fc" id="L86">			userRewards.add(userReward);</span>
+		}
+<span class="fc" id="L88">	}</span>
+
+	public List&lt;UserReward&gt; getUserRewards() {
+<span class="fc" id="L91">		return userRewards;</span>
+	}
+
+	public UserPreferences getUserPreferences() {
+<span class="nc" id="L95">		return userPreferences;</span>
+	}
+
+	public void setUserPreferences(UserPreferences userPreferences) {
+<span class="nc" id="L99">		this.userPreferences = userPreferences;</span>
+<span class="nc" id="L100">	}</span>
+
+	public VisitedLocation getLastVisitedLocation() {
+<span class="nc" id="L103">		return visitedLocations.get(visitedLocations.size() - 1);</span>
+	}
+
+	public void setTripDeals(List&lt;Provider&gt; tripDeals) {
+<span class="nc" id="L107">		this.tripDeals = tripDeals;</span>
+<span class="nc" id="L108">	}</span>
+
+	public List&lt;Provider&gt; getTripDeals() {
+<span class="nc" id="L111">		return tripDeals;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
