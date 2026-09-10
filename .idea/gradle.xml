@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/TourGuide" />
+            <option value="$PROJECT_DIR$/TourGuide/TourGuide-ms" />
             <option value="$PROJECT_DIR$/TourGuide/gpsutil-service" />
             <option value="$PROJECT_DIR$/TourGuide/rewardscentral-service" />
             <option value="$PROJECT_DIR$/TourGuide/trippricer-service" />
