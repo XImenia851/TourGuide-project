@@ -19,7 +19,12 @@ Install Gradle: https://gradle.org/install/
 Install Docker Desktop: https://docs.docker.com/docker-for-windows/ or https://docs.docker.com/docker-for-mac/
 
 ##Technical Specifications
-four MicroServices : [WORKING ON IT, BUT ALREADY IDENTIFIED]*
+four MicroServices : 
+- TourGuide-ms (simple copy of the tourguide monolith)
+- Trippricer-service
+- grputil-service
+- rewardcentral-service
+
 
 ##Run the app :
 [WORK IN PROGRESS]
@@ -29,6 +34,7 @@ TourGuide has a full integration and unit test suite. You can launch it with the
 
 $ ./gradlew test
 
+100 000 users on the split branch work at 1 minute 12 sec for the test performance.
 
 #WORK IN PROGRESS.
 -XMakaraArt
