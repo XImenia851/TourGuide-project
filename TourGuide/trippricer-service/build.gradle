@@ -20,6 +20,6 @@ targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile files('../libs/TripPricer.jar')
+    compile files('libs/TripPricer.jar')
     compile group: 'com.jsoniter', name: 'jsoniter', version: '0.9.23'
 }

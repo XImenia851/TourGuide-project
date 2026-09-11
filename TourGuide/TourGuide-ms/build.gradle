@@ -23,7 +23,7 @@ bootJar {
 repositories {
     mavenCentral()
     flatDir {
-        dirs '../libs'
+        dirs '/libs'
     }
 }
 
