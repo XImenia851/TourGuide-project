@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="TourGuide.main" target="1.8" />
+      <module name="TourGuide.test" target="1.8" />
+      <module name="TourGuide.tourguide-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="TourGuide" options="-parameters" />
+      <module name="TourGuide.TourGuide-ms" options="-parameters" />
+      <module name="TourGuide.TourGuide-ms.main" options="-parameters" />
+      <module name="TourGuide.TourGuide-ms.test" options="-parameters" />
       <module name="TourGuide.gpsutil-service" options="-parameters" />
       <module name="TourGuide.gpsutil-service.main" options="-parameters" />
       <module name="TourGuide.gpsutil-service.test" options="-parameters" />
@@ -11,6 +20,7 @@
       <module name="TourGuide.rewardscentral-service.main" options="-parameters" />
       <module name="TourGuide.rewardscentral-service.test" options="-parameters" />
       <module name="TourGuide.test" options="-parameters" />
+      <module name="TourGuide.tourguide-service" options="-parameters" />
       <module name="TourGuide.trippricer-service" options="-parameters" />
       <module name="TourGuide.trippricer-service.main" options="-parameters" />
       <module name="TourGuide.trippricer-service.test" options="-parameters" />
