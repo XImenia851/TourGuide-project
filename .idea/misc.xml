@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/gpsutil-service" />
+    <file type="web" url="file://$PROJECT_DIR$/rewardscentral-service" />
     <file type="web" url="file://$PROJECT_DIR$/TourGuide" />
+    <file type="web" url="file://$PROJECT_DIR$/TourGuide-ms" />
+    <file type="web" url="file://$PROJECT_DIR$/trippricer-service" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_25" project-jdk-name="corretto-1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
