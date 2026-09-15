@@ -4,15 +4,34 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/TourGuide" />
-        <option name="gradleJvm" value="corretto-1.8" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TourGuide-ms" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/TourGuide" />
-            <option value="$PROJECT_DIR$/TourGuide/TourGuide-ms" />
-            <option value="$PROJECT_DIR$/TourGuide/gpsutil-service" />
-            <option value="$PROJECT_DIR$/TourGuide/rewardscentral-service" />
-            <option value="$PROJECT_DIR$/TourGuide/trippricer-service" />
+            <option value="$PROJECT_DIR$/TourGuide-ms" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/gpsutil-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/gpsutil-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/rewardscentral-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/rewardscentral-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/trippricer-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/trippricer-service" />
           </set>
         </option>
       </GradleProjectSettings>
