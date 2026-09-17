@@ -15,7 +15,8 @@ import tripPricer.Provider;
 @Service
 public class TripPricerWebClient {
 
-    private final WebClient webClient = WebClient.create("http://localhost:8083");
+    private final WebClient webClient = WebClient.create(
+            System.getenv().getOrDefault("TRIPPRICER_SERVICE_URL", "http://localhost:8083"));
 
     public List<Provider> getPrice(String apiKey, UUID userId, int numberOfAdults, int numberOfChildren,
                                    int tripDuration, int rewardPoints) {

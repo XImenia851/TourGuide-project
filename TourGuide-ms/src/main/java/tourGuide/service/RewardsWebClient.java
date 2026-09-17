@@ -8,7 +8,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class RewardsWebClient {
 
-    private final WebClient webClient = WebClient.create("http://localhost:8082");
+    private final WebClient webClient = WebClient.create(
+            System.getenv().getOrDefault("REWARDSCENTRAL_SERVICE_URL", "http://localhost:8082"));
 
     public int getAttractionRewardPoints(UUID attractionId, UUID userId) {
         String response = webClient.get()
