@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  gpsutil-service:
+    build: ./gpsutil-service
+    ports:
+      - "8081:8081"
+
+  rewardscentral-service:
+    build: ./rewardscentral-service
+    ports:
+      - "8082:8082"
+
+  trippricer-service:
+    build: ./trippricer-service
+    ports:
+      - "8083:8083"
+
+  tourguide-ms:
+    build: ./TourGuide-ms
+    ports:
+      - "8080:8080"
+    environment:
+      - GPSUTIL_SERVICE_URL=http://gpsutil-service:8081
+      - REWARDSCENTRAL_SERVICE_URL=http://rewardscentral-service:8082
+      - TRIPPRICER_SERVICE_URL=http://trippricer-service:8083
+    depends_on:
+      - gpsutil-service
+      - rewardscentral-service
+      - trippricer-service

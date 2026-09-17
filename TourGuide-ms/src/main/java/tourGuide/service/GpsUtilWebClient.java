@@ -18,7 +18,8 @@ import gpsUtil.location.VisitedLocation;
 @Service
 public class GpsUtilWebClient {
 
-    private final WebClient webClient = WebClient.create("http://localhost:8081");
+    private final WebClient webClient = WebClient.create(
+            System.getenv().getOrDefault("GPSUTIL_SERVICE_URL", "http://localhost:8081"));
 
     public VisitedLocation getUserLocation(UUID userId) {
         String json = webClient.get()
